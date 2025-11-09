@@ -40,9 +40,10 @@ jobs:
       - name: Build site
         run: |
           npm run build
-          bundle exec jekyll b -d "_site" --safe
+          bundle exec jekyll b -d "_site" --trace
         env:
           JEKYLL_ENV: "production"
+          BUNDLE_GEMFILE: "${{ github.workspace }}/Gemfile"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
