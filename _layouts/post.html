@@ -180,7 +180,7 @@ This prevents Cusdis from appear everywhere-->
   data-page-id="{{ page.id }}"
   data-page-url="{{ site.url }}{{ page.baseurl }}{{ page.url }}"
   data-page-title="{{ page.title }}"
-  data-theme="auto"
+  data-theme="{{ site.theme_mode | default: 'auto' }}"
 ></div>
 
 <script defer src="https://cusdis.com/js/cusdis.es.js"></script>
