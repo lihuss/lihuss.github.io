@@ -5,6 +5,13 @@ on:
     branches: [main, production]
     tags-ignore: ["**"]
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  issues: write
+  pull-requests: write
+
 jobs:
   release:
     if: ${{ ! startsWith(github.event.head_commit.message, 'chore(release)') }}
