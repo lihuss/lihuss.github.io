@@ -171,7 +171,11 @@ script_includes:
         {% endif %}
       </div>
 
-        {%- if page.id -%}
+        
+
+      {% include post-sharing.html lang=lang %}
+    </div>
+    {%- if page.id -%}
 <!--Every article has a id, but special pages don't unless you set manually.
 This prevents Cusdis from appear everywhere-->
 <div id="cusdis_thread"
@@ -186,8 +190,42 @@ This prevents Cusdis from appear everywhere-->
 <script defer src="https://cusdis.com/js/cusdis.es.js"></script>
 {%- endif -%}
 
-      {% include post-sharing.html lang=lang %}
-    </div>
+<script>
+  // Sync Cusdis theme with site theme immediately and on theme changes
+  (function() {
+    function getCurrentTheme() {
+      // If site has explicit data-mode attribute use it, otherwise fall back to system preference
+      const dm = document.documentElement.getAttribute('data-mode');
+      if (dm === 'dark' || dm === 'light') return dm;
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function trySetCusdisTheme() {
+      const theme = getCurrentTheme();
+      if (window.CUSDIS && typeof window.CUSDIS.setTheme === 'function') {
+        window.CUSDIS.setTheme(theme);
+      } else if (document.readyState !== 'complete') {
+        // try again shortly until cusdis script loads
+        setTimeout(trySetCusdisTheme, 150);
+      }
+    }
+
+    // initial sync
+    trySetCusdisTheme();
+
+    // listen for theme toggles from Theme class (it posts a message with id 'theme-mode')
+    window.addEventListener('message', function (e) {
+      try {
+        const data = e.data;
+        if (data && data.id === 'theme-mode') {
+          trySetCusdisTheme();
+        }
+      } catch (err) {
+        // ignore
+      }
+    });
+  })();
+</script>
     <!-- .post-tail-bottom -->
   </div>
   <!-- div.post-tail-wrapper -->
