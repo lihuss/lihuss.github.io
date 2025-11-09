@@ -3,21 +3,51 @@ name: Publish
 on:
   push:
     branches:
-      - docs
-  workflow_call:
-    secrets:
-      GH_PAT:
-        required: true
-      BUILDER:
-        required: true
+      - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  launch:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - run: |
-          curl -X POST -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.GH_PAT }}" \
-            https://api.github.com/repos/${{ secrets.BUILDER }}/dispatches \
-            -d '{"event_type":"deploy", "client_payload":{"branch": "${{ github.ref_name }}"}}'
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+          bundler-cache: true
+
+      - name: Install Dependencies
+        run: |
+          bundle install
+          npm install
+
+      - name: Build site
+        run: |
+          npm run build
+          bundle exec jekyll b -d "_site" --safe
+        env:
+          JEKYLL_ENV: "production"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
