@@ -175,6 +175,7 @@ script_includes:
 
       {% include post-sharing.html lang=lang %}
     </div>
+
     {%- if page.id -%}
 <!--Every article has a id, but special pages don't unless you set manually.
 This prevents Cusdis from appear everywhere-->
@@ -231,30 +232,77 @@ This prevents Cusdis from appear everywhere-->
 <style>
   /* Ensure the cusdis container and iframe expand to fit content and don't show internal scrollbar */
   #cusdis_thread { overflow: visible !important; }
-  #cusdis_thread iframe { width: 100% !important; display: block; min-height: 200px; border: 0 !important; }
+  #cusdis_thread iframe { width: 100% !important; display: block; min-height: 400px; border: 0 !important; }
 </style>
 
 <script>
-  // Ensure the host page uses the height reported by the Cusdis iframe.
-  window.addEventListener('message', function (e) {
-    try {
-      var msg = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-      if (!msg || msg.from !== 'cusdis') return;
-      if (msg.event === 'resize' && msg.data) {
-        var iframe = document.querySelector('#cusdis_thread iframe');
-        if (iframe) {
-          iframe.style.height = msg.data + 'px';
-        }
-        var container = document.getElementById('cusdis_thread');
-        if (container) {
+  // Try to coerce Cusdis iframe to resize: set an initial large height, poll the iframe
+  // and send theme messages until the widget reports 'resize'. This handles cases where
+  // the widget doesn't post a resize immediately.
+  (function() {
+    const container = document.getElementById('cusdis_thread');
+    if (!container) return;
+
+    function currentTheme() {
+      const dm = document.documentElement.getAttribute('data-mode');
+      if (dm === 'dark' || dm === 'light') return dm;
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // apply an initial generous height to avoid inner scrollbar
+    function applyInitialHeight(h) {
+      const iframe = container.querySelector('iframe');
+      if (iframe) {
+        iframe.style.height = h + 'px';
+      }
+      container.style.height = h + 'px';
+    }
+
+    applyInitialHeight(1000);
+
+    // keep applying initial height until iframe is created (max ~1.5s)
+    let initTries = 0;
+    const initInterval = setInterval(() => {
+      applyInitialHeight(700);
+      initTries += 1;
+      if (initTries > 10) clearInterval(initInterval);
+    }, 150);
+
+    // listen for cusdis messages and apply resize when provided
+    let resizeReceived = false;
+    window.addEventListener('message', function (e) {
+      try {
+        const msg = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+        if (!msg || msg.from !== 'cusdis') return;
+        if (msg.event === 'resize' && msg.data) {
+          resizeReceived = true;
+          const iframe = container.querySelector('iframe');
+          if (iframe) iframe.style.height = msg.data + 'px';
           container.style.height = msg.data + 'px';
         }
+      } catch (err) {
+        // ignore
       }
-    } catch (err) {
-      // ignore parse errors
-    }
-  }, false);
+    }, false);
+
+    // poll and poke the iframe by sending setTheme messages until we get a resize
+    let pollCount = 0;
+    const poll = setInterval(() => {
+      const iframe = container.querySelector('iframe');
+      if (iframe && iframe.contentWindow && !resizeReceived) {
+        try {
+          iframe.contentWindow.postMessage(JSON.stringify({ from: 'cusdis', event: 'setTheme', data: currentTheme() }), '*');
+        } catch (err) {
+          // ignore
+        }
+      }
+      pollCount += 1;
+      if (resizeReceived || pollCount > 20) clearInterval(poll);
+    }, 250);
+  })();
 </script>
+
+
     <!-- .post-tail-bottom -->
   </div>
   <!-- div.post-tail-wrapper -->
