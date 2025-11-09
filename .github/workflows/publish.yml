@@ -33,6 +33,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          bundle config set --local path 'vendor/bundle'
           bundle install
           npm install
 
