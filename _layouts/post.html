@@ -227,6 +227,34 @@ This prevents Cusdis from appear everywhere-->
     });
   })();
 </script>
+
+<style>
+  /* Ensure the cusdis container and iframe expand to fit content and don't show internal scrollbar */
+  #cusdis_thread { overflow: visible !important; }
+  #cusdis_thread iframe { width: 100% !important; display: block; min-height: 200px; border: 0 !important; }
+</style>
+
+<script>
+  // Ensure the host page uses the height reported by the Cusdis iframe.
+  window.addEventListener('message', function (e) {
+    try {
+      var msg = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+      if (!msg || msg.from !== 'cusdis') return;
+      if (msg.event === 'resize' && msg.data) {
+        var iframe = document.querySelector('#cusdis_thread iframe');
+        if (iframe) {
+          iframe.style.height = msg.data + 'px';
+        }
+        var container = document.getElementById('cusdis_thread');
+        if (container) {
+          container.style.height = msg.data + 'px';
+        }
+      }
+    } catch (err) {
+      // ignore parse errors
+    }
+  }, false);
+</script>
     <!-- .post-tail-bottom -->
   </div>
   <!-- div.post-tail-wrapper -->
