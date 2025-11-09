@@ -125,59 +125,6 @@ script_includes:
   <div class="content">
     {{ content }}
   </div>
-  {%- if page.id -%}
-<!--Every article has a id, but special pages don't unless you set manually.
-This prevents Cusdis from appear everywhere-->
-<div id="cusdis_thread"
-  data-host="https://cusdis.com"
-  data-app-id="b76b1117-8b52-4890-989c-914624e8d2ca"
-  data-page-id="{{ page.id }}"
-  data-page-url="{{ site.url }}{{ page.baseurl }}{{ page.url }}"
-  data-page-title="{{ page.title }}"
-></div>
-<script lang="ts">
-import { getStoredTheme } from '@utils/setting-utils'
-import { siteConfig } from '@/config'
-import { onMount } from 'svelte'
- 
-export let pageKey: string
-export let pageTitle: string
-let script: HTMLScriptElement
-const staticHost =
-  siteConfig.artalk?.cdn ?? `${siteConfig.artalk?.server!}/dist`
- 
-onMount(() => {
-  const theme = getStoredTheme()
-  script.addEventListener('load', () => {
-    const artalk = Artalk.init({
-      el: '#comments',
-      pageKey: pageKey,
-      pageTitle: pageTitle,
-      server: siteConfig.artalk?.server,
-      site: siteConfig.title,
-      darkMode: theme === 'dark' ? true : theme === 'light' ? false : 'auto',
-    })
-    window.addEventListener('theme-change', e => {
-      const theme = e.detail
-      artalk.setDarkMode(
-        theme === 'dark' ? true : theme === 'light' ? false : 'auto',
-      )
-    })
-  })
-})
-</script>
- 
-<svelte:head>
-    <link href={`${staticHost}/Artalk.css`} rel="stylesheet" />
-    <script src={`${staticHost}/Artalk.js`} bind:this={script}></script>
-</svelte:head>
- 
-<div
-    id="comments"
-    style="--at-color-main:var(--primary)"
-></div>
-<script defer src="https://cusdis.com/js/cusdis.es.js"></script>
-{%- endif -%}
 
   <div class="post-tail-wrapper text-muted">
     <!-- categories -->
@@ -223,6 +170,21 @@ onMount(() => {
           {{ site.data.locales[lang].copyright.license.template | replace: ':LICENSE_NAME', _replacement }}
         {% endif %}
       </div>
+
+        {%- if page.id -%}
+<!--Every article has a id, but special pages don't unless you set manually.
+This prevents Cusdis from appear everywhere-->
+<div id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="b76b1117-8b52-4890-989c-914624e8d2ca"
+  data-page-id="{{ page.id }}"
+  data-page-url="{{ site.url }}{{ page.baseurl }}{{ page.url }}"
+  data-page-title="{{ page.title }}"
+  data-theme="auto"
+></div>
+
+<script defer src="https://cusdis.com/js/cusdis.es.js"></script>
+{%- endif -%}
 
       {% include post-sharing.html lang=lang %}
     </div>
