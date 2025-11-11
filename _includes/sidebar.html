@@ -7,7 +7,9 @@
         {%- capture avatar_url -%}
           {% include media-url.html src=site.avatar %}
         {%- endcapture -%}
-        <img src="{{- avatar_url -}}" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
+        {% capture favicon_path %}{{ '/assets/img/favicons' | relative_url }}{% endcapture %}
+        <img src="https://picx.zhimg.com/v2-6e9ae4c07862c733aa0c6d192b03feea_xl.jpg?source=32738c0c&needBackground=1" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
+
       {%- endif -%}
     </a>
 
