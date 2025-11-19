@@ -18,7 +18,7 @@ author: lihus
 如何理解这三种遍历顺序呢？一开始，我看了几篇文章都没懂。当我抛开这些文章里的图示，从计算机的角度、编写代码的角度看，
 事情便清晰了许多。试想编写结点的结构体，代码应如下：
 
-```C
+```c
 struct Node{
     Node* left;
     int data;
@@ -41,7 +41,7 @@ struct Node{
 
 线索化后的二叉树可以高效进行非递归遍历：
 
-```C++
+```c++
 void InOrderTraverse(Ttree Thrt) {
 Ttree p = Thrt->lchild; // 从根结点开始
 while (p != Thrt) {
