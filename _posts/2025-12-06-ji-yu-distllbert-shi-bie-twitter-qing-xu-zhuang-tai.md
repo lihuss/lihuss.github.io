@@ -7,9 +7,23 @@ tags: [Transformer,BERT]
 ---
 
 搞了一天终于完成了人工智能的大作业！
+<style>
+.post-content {
+  max-width: 100% !important;
+}
+#main-wrapper,
+#main {
+  overflow: visible !important;
+}
+.pdf-viewer iframe {
+  width: 100%;
+  height: 100vh;
+  border: none;
+}
+</style>
 
-<iframe
-  src="/assets/pdfs/report.pdf" 
-  width="100%" 
-  height="100%">
-</iframe>
+<div class="pdf-viewer">
+  <iframe 
+    src="/assets/pdfjs/web/viewer.html?file=/assets/pdfs/report.pdf">
+  </iframe>
+</div>
