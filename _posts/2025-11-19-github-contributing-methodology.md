@@ -3,7 +3,7 @@ title: Github Contributing Methodology
 author: lihus
 date: 2025-11-19 20:19:39 +0800
 categories: [CS]
-tags: [github]
+tags: [Github]
 ---
 
 在树洞看到一篇帖子，记一下
