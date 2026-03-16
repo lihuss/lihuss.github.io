@@ -1,84 +1,99 @@
-<!-- markdownlint-disable-next-line -->
-<div align="center">
+# Astro Theme Pure
 
-  <!-- markdownlint-disable-next-line -->
-  # Chirpy Jekyll Theme
+English | [简体中文](./README-zh-CN.md)
 
-  A minimal, responsive, and feature-rich Jekyll theme for technical writing.
+A simple, fast and powerful blog & document theme built by Astro.
 
-  [![CI](https://img.shields.io/github/actions/workflow/status/cotes2020/jekyll-theme-chirpy/ci.yml?logo=github)][ci]&nbsp;
-  [![Codacy Badge](https://img.shields.io/codacy/grade/4e556876a3c54d5e8f2d2857c4f43894?logo=codacy)][codacy]&nbsp;
-  [![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=goldenrod)][license]&nbsp;
-  [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=ghostwhite&label=gem&color=orange)][gem]&nbsp;
-  [![Open in Dev Containers](https://img.shields.io/badge/Dev_Containers-Open-deepskyblue?logo=linuxcontainers)][open-container]
+[![GitHub deployments](https://img.shields.io/github/deployments/cworld1/astro-theme-pure/production?style=flat&logo=vercel&label=vercel)](https://astro-pure.js.org/)
+[![NPM Version](https://img.shields.io/npm/v/astro-pure?logo=npm&style=flat)](https://www.npmjs.com/package/astro-pure)
+[![GitHub Release](https://img.shields.io/github/v/release/cworld1/astro-theme-pure?include_prereleases&style=flat&label=template)](https://github.com/cworld1/astro-theme-pure/releases)
+[![GitHub License](https://img.shields.io/github/license/cworld1/astro-theme-pure?style=flat)](https://github.com/cworld1/astro-theme-pure/blob/main/LICENSE)
 
-  [**Live Demo** →][demo]
+![image](./.github/assets/header.webp)
+![image](./.github/assets/body.webp)
 
-  [![Devices Mockup](https://chirpy-img.netlify.app/commons/devices-mockup.png)][demo]
+> [!NOTE]
+> Known issues: 1. Header & customize options is still under development (template exposed still). 2. Theme template v4.0.5^ UnoCSS preset changed to PresetMini. If there's any problem, please report as issue.
 
-</div>
+## Introduction
 
-## Features
+Checkout [Demo Site →](https://astro-pure.js.org/)
 
-- Dark Theme
-- Localized UI language
-- Pinned Posts on Home Page
-- Hierarchical Categories
-- Trending Tags
-- Table of Contents
-- Last Modified Date
-- Syntax Highlighting
-- Mathematical Expressions
-- Mermaid Diagrams & Flowcharts
-- Dark Mode Images
-- Embed Media
-- Comment Systems
-- Built-in Search
-- Atom Feeds
-- PWA
-- Web Analytics
-- SEO & Performance Optimization
+### :fire: Features
+
+- [x] :rocket: Fast & high performance
+- [x] :star: Simple & clean design
+- [x] :iphone: Responsive design
+- [x] :mag: Full-site search built with [pagefind](https://pagefind.app/)
+- [x] :world_map: Sitemap & RSS feed
+- [x] :spider_web: SEO-friendly
+- [x] :book: TOC (table of contents)
+- [x] :framed_picture: Dynamic open graph generation for posts
+- [x] :framed_picture: Mediumzoom lightbox for images
+
+### :package: Components
+
+Theme includes a lot of components, which can not only be used in the theme, but also in other astro projects.
+
+> For other astro projects, UnoCSS is required. See [Package README](https://github.com/cworld1/astro-theme-pure/blob/main/packages/pure/README.md#use-with-common-astro-project) for more details.
+
+- Basic components: `Aside`, `Tabs`, `Timeline`, `Steps`, `Spoiler`...
+- Advanced components: `GithubCard`, `LinkPreview`, `Quote`, `QRCode`...
+
+### :white_check_mark: Lighthouse score
+
+[![lighthouse-score](./.github/assets/lighthouse-score.png)](https://pagespeed.web.dev/analysis/https-cworld-top/o229zrt5o4?form_factor=mobile&hl=en)
 
 ## Documentation
 
-To learn how to use, develop, and upgrade the project, please refer to the [Wiki][wiki].
+[Docs](https://astro-pure.js.org/docs) | [Showcase](https://github.com/cworld1/astro-theme-pure/issues/10)
 
-## Contributing
+## Package
 
-Contributions (_pull requests_, _issues_, and _discussions_) are what make the open-source community such an amazing place
-to learn, inspire, and create. Any contributions you make are greatly appreciated.
-For details, see the "[Contributing Guidelines][contribute-guide]".
+See [astro-theme-pure](https://www.npmjs.com/package/astro-pure) on npm.
 
-## Credits
+## Local development
 
-### Contributors
+Environment requirements:
 
-Thanks to [all the contributors][contributors] involved in the development of the project!
+- [Nodejs](https://nodejs.org/): 18.0.0+
 
-[![all-contributors](https://contrib.rocks/image?repo=cotes2020/jekyll-theme-chirpy&columns=16)][contributors]
-<sub> — Made with [contrib.rocks](https://contrib.rocks)</sub>
+Clone the repository:
 
-### Third-Party Assets
+```shell
+git clone https://github.com/cworld1/astro-theme-pure.git
+cd astro-theme-pure
+```
 
-This project is built on the [Jekyll][jekyllrb] ecosystem and some [great libraries][lib], and is developed using [VS Code][vscode] as well as tools provided by [JetBrains][jetbrains] under a non-commercial open-source software license.
+Useful commands:
 
-The avatar and favicon for the project's website are from [ClipartMAX][clipartmax].
+```shell
+# Install dependencies
+bun install
+# Start the dev server
+bun dev
+# Build the project
+bun run build
+# Preview (after the build)
+bun preview
+# Create a new post
+bun pure new
+```
+
+## Contributions
+
+To spend more time coding and less time fiddling with whitespace, this project uses code conventions and styles to encourage consistency. Code with a consistent style is easier (and less error-prone!) to review, maintain, and understand.
+
+## Thanks
+
+- [Astro Cactus](https://github.com/chrismwilliams/astro-theme-cactus)
+- [Astro Resume](https://github.com/srleom/astro-theme-resume)
+- [Starlight](https://github.com/withastro/starlight)
+
+Other third party references are on [Docs#Contributions](https://astro-pure.js.org/docs/advanced/about). Appreciate for all open source libraries.
 
 ## License
 
-This project is published under [MIT License][license].
+This project is licensed under the Apache 2.0 License.
 
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[ci]: https://github.com/cotes2020/jekyll-theme-chirpy/actions/workflows/ci.yml?query=event%3Apush+branch%3Amaster
-[codacy]: https://app.codacy.com/gh/cotes2020/jekyll-theme-chirpy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade
-[license]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE
-[open-container]: https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/cotes2020/jekyll-theme-chirpy
-[jekyllrb]: https://jekyllrb.com/
-[clipartmax]: https://www.clipartmax.com/middle/m2i8b1m2K9Z5m2K9_ant-clipart-childrens-ant-cute/
-[demo]: https://cotes2020.github.io/chirpy-demo/
-[wiki]: https://github.com/cotes2020/jekyll-theme-chirpy/wiki
-[contribute-guide]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/docs/CONTRIBUTING.md
-[contributors]: https://github.com/cotes2020/jekyll-theme-chirpy/graphs/contributors
-[lib]: https://github.com/cotes2020/chirpy-static-assets
-[vscode]: https://code.visualstudio.com/
-[jetbrains]: https://www.jetbrains.com/?from=jekyll-theme-chirpy
+[![Star History Chart](https://api.star-history.com/svg?repos=cworld1/astro-theme-pure&type=Date)](https://star-history.com/#cworld1/astro-theme-pure&Date)
