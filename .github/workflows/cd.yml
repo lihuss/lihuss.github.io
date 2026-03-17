@@ -3,35 +3,12 @@ name: CD
 on:
   push:
     branches: [main]
-    tags-ignore: ["**"]
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
-  issues: write
-  pull-requests: write
 
 jobs:
-  release:
-    if: ${{ ! startsWith(github.event.head_commit.message, 'chore(release)') }}
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - run: npm install
-      - run: npx semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  publish:
-    needs: release
+  deploy:
     uses: ./.github/workflows/publish.yml
