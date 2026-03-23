@@ -1,0 +1,33 @@
+---
+title: "介绍我的视频生成项目 FilaGlyph"
+description: "从原本的WordRhythm中分离而来，WordRhythm这个名字还是为一开始的纯文字视频起的，有必要将这两个没什么重合度的视频生成分离开来，给新项目起个更合适的名字。"
+publishDate: 2026-03-23T23:37:00+08:00
+tags:
+  - Github
+  - model
+  - text2video
+  - ai
+  - project
+  - ML
+draft: false
+comment: true
+---
+
+import demoVideo from './demo.mp4'
+
+> “Innovation is doing things that are different, not just doing different things.” — Joseph Schumpeter
+
+做这个项目，一是眼馋抖音上manim动画受欢迎，二是助教兼职如果用视频答疑能加15分。反正都是为金钱所诱惑……项目前身在[../intro-wordrhythm/index.mdx](做了一个文生视频项目——WordRhythm)。
+
+辗转多种方法，发现还是让Gemini根据题目图片直接输出2D版的manim代码最标准最清晰最适合教学。是啊，虽然高中物理很多3D图，但考的实际都是2D的东西，我不知道我在死磕什么。
+
+不过说白了还是我又懒又菜，最终才选择 *大道至简* 罢了。
+
+这里贴一个初步的成果：
+
+<video controls preload="metadata" style={{ width: '100%', borderRadius: '12px' }}>
+  <source src={"./energy_conservation.mp4"} type="video/mp4" />
+  你的浏览器不支持 video 标签。
+</video>
+
+感觉已经能用来教学了，只需要让CosyVoice学习我的声音，用我的声线解说视频，就近乎完美。
