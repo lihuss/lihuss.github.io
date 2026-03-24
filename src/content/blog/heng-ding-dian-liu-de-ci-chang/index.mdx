@@ -1,0 +1,101 @@
+---
+title: "恒定电流的磁场 学习笔记"
+description: "我真不行了，上了24天学只去了一节物理课，而且还没听课"
+publishDate: 2026-03-24T10:40:25+08:00
+tags:
+  - physics
+  - notes
+  - school
+draft: false
+comment: true
+---
+
+import { Image } from 'astro:assets';
+
+看课本又看不进去，那么就来一点点推导吧。
+
+## 比奥-萨法尔定律
+
+电流的磁场，就看最基本的公式：$$dB=\frac{\mu}{4\pi}\cdot \frac{dI\sin \theta}{r^2}$$
+
+然后推导载流导线外一点的磁场大小，已知 $I,r$
+
+import segment from './segment.png';
+
+<Image src={segment} alt="载流导线外一点"/>
+
+$$B=\int_{\beta}^{\alpha}\frac{dI\sin^3 \theta}{r^2}$$
+
+其中 $dI=\frac{Ir d\theta}{l\sin \theta}$，代入得
+
+$$B=\frac{I}{lr}\int_{\beta}{\alpha}\sin^2\theta d\theta=\frac{I(2\alpha-2\beta+\sin 2\beta-\sin2\alpha)}{4lr}=\frac{I(2\alpha-2\beta+\cos(\alpha+\beta)\sin(\alpha-\beta))}{4lr}$$
+
+又因为 $l=r(\frac1{\tan \beta-\tan \alpha})$，所以
+
+$$B=\frac{I(2\alpha-2\beta+\cos(\alpha+\beta)\sin(\alpha-\beta))\sin\alpha\sin\beta}{4r^2\sin(\alpha-\beta)}$$
+
+---
+
+算出这么奇怪的结果，一看推导过程错漏百出，我真老实了。连最开始的最基本的比奥萨法尔定律都记错了。正确的应该是：
+
+$$dB=\frac{\mu_0}{4\pi}\frac{Idl\sin\theta}{r^2}$$
+
+这就好了，直接把 $dl=\frac{rd\theta}{\sin^2\theta}$ 代入就非常简单，哪有第一次推导那么复杂。
+
+$$dB=\frac{mu_0I}{4\pi r}\sin\theta d\theta$$
+
+$$B=\frac{mu_0I}{4\pi r}(\cos\beta-\cos\alpha)$$
+
+就这样水灵灵算出来了。
+
+那么**对于无限长直线，距离为 $r$ 处的点的磁感应强度为$\frac{mu_0I}{2\pi r}$**。
+
+## 磁场力做功
+
+首先洛伦兹力不做功，那么就是安培力做功。安培力是对载流导线说的，那就考虑载流微元。先想想载流微元绕某个点转一圈，安培力做不做功，也就是看看它是不是保守力。
+
+安培力肯定不是保守力，因为如果导线微元的方向和径向共线，那么安培力就一直和速度共线。
+
+先考虑导线微元的方向和径向共线的情况，如果导线微元转过 $d\theta$ 角度，那么安培力做功 $dW_A=IBdl\cdot rd\theta$。
+
+导线微元的方向和径向不共线的话，按径向和切向分安培力，就是一个内积的事。
+
+#### 无限长导线垂直于旋转圆轨迹
+
+那如果是无限长载流$I_1$的导线产生的磁场呢？这时磁场并非处处相等。假设一个通有电流$I_2$的微元导线以距离无限长载流导线 $R$ 的一个点为圆心做半径为 $r$ 的和无限长载流导线垂直的圆周运动，假设导线微元与圆心的连线，和圆心到无限长载流导线的垂线的夹角为 $\theta$，转过了 $d\theta$ 角。
+
+假设微元导线的方向始终指向圆周运动的圆心，离无限长导线距离最远时为起始点$\theta=0$，那么此时做的功就是 
+
+$$dW_A=I_2\frac{\mu_0I_1}{2\pi (R+r\cos\theta)}dl\cdot rd\theta$$
+
+所以如果一根导线的一端固定并且与无限长载流导线的距离为$R$，这根动导线的长度为 $l$ ，那么它绕垂直于静导线的方向旋转一周，磁场力做的功是
+
+$$W_A=\frac{\mu_0I_1I_2}{2\pi}\int_0^{2\pi}\int_0^l \frac{r}{R+r\cos\theta}dr d\theta=0$$
+
+---
+
+这就是过程错误但结论正确的例子，如果静止导线垂直于动导线的圆轨迹，那么安培力垂直于圆，肯定不做功。
+
+那么如果是静止导线平行圆轨迹呢？
+
+#### 无限长导线平行于旋转圆轨迹
+
+由于只有切向的安培力分力做功，所以直接求分力做功就好了。
+
+$$F_n=I_2\int_0^l \frac{\mu_0I_1r\sin\theta}{2\pi (R^2+r^2\sin^2\theta)}dr=\frac{\mu_0I_1I_2}{4\pi\sin\theta}\ln\frac{R^2+l^2\sin^2\theta}{R^2}$$
+
+$$W_A=\int_0^{2\pi} F_n ld\theta=0$$
+
+既然无论是水平旋转还是垂直旋转，做功都是 $0$，那么任何方向的旋转，磁场力做功都是 $0$。
+
+---
+
+这还是错误的，怎么能先算出总力然后乘位移呢？每个微元的位移是不一样的。
+
+### 磁通量
+
+看来算这个很复杂，那么这时候就需要知道安培力做功等于电流乘以扫过的磁通量：
+
+$$W=I\Delta \Phi$$
+
+这就好算了，作业题也能解出来了。
