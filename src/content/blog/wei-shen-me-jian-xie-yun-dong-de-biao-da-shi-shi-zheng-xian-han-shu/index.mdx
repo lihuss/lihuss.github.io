@@ -1,0 +1,163 @@
+---
+title: "为什么简谐运动公式是正弦函数？"
+description: "知乎回答"
+publishDate: 2026-05-01T20:34:54+08:00
+tags:
+  - math
+draft: false
+comment: true
+---
+
+无聊来挖坟。猜看这个问题的都是高中生，那就写点高中生爱看的嘻嘻🤭
+
+最小作用量
+-----
+
+拉格朗日量定义为系统的动能 ![T](https://www.zhihu.com/equation?tex=T) 与势能 ![V](https://www.zhihu.com/equation?tex=V) 之差：
+
+![L = T - V](https://www.zhihu.com/equation?tex=L+%3D+T+-+V)
+
+作用量 ![S](https://www.zhihu.com/equation?tex=S) 为拉格朗日量 ![L](https://www.zhihu.com/equation?tex=L) 在时间段 ![[t_1, t_2]](https://www.zhihu.com/equation?tex=%5Bt_1%2C+t_2%5D) 上的积分：
+
+![S = \int_\{t_1\}^\{t_2\} L(q, \dot\{q\}, t) dt](https://www.zhihu.com/equation?tex=S+%3D+%5Cint_%7Bt_1%7D%5E%7Bt_2%7D+L%28q%2C+%5Cdot%7Bq%7D%2C+t%29+dt)
+
+在哈密顿力学中，系统的状态由其在某一时刻的所有广义坐标 ![q = (q_1, \dots, q_n)](https://www.zhihu.com/equation?tex=q+%3D+%28q_1%2C+%5Cdots%2C+q_n%29) 和广义动量 ![p = (p_1, \dots, p_n)](https://www.zhihu.com/equation?tex=p+%3D+%28p_1%2C+%5Cdots%2C+p_n%29) 唯一确定。
+
+广义坐标 ![q](https://www.zhihu.com/equation?tex=q) 指任何能够完全描述系统几何构型的独立变量，如角度、长度。广义动量 ![p](https://www.zhihu.com/equation?tex=p) 是与广义坐标共轭的物理量，严格定义为拉格朗日量 ![L](https://www.zhihu.com/equation?tex=L) 对广义速度 ![\dot\{q\}](https://www.zhihu.com/equation?tex=%5Cdot%7Bq%7D) 的偏导数 ![p_i = \frac\{\partial L\}\{\partial \dot\{q\}_i\}](https://www.zhihu.com/equation?tex=p_i+%3D+%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D_i%7D)。
+
+根据**最小作用量原理**，在物体所有可能的运动路径中，实际路径是那条使得作用量取极小值的路径。也就是说，我们要找到一个函数 ![q(t)](https://www.zhihu.com/equation?tex=q%28t%29) ,使得作用量 ![S](https://www.zhihu.com/equation?tex=S) 取极小值。回忆高中的极小值的性质：函数的自变量在极小值处做微小的变化时，因变量的变化量为 ![0](https://www.zhihu.com/equation?tex=0) .类比到这里，就是路径 ![q(t)](https://www.zhihu.com/equation?tex=q%28t%29) 作微小扰动时，作用量 ![S](https://www.zhihu.com/equation?tex=S) 的变化量为 ![0](https://www.zhihu.com/equation?tex=0) .
+
+欧拉-拉格朗日方程
+---------
+
+要解这个函数 ![q(t)](https://www.zhihu.com/equation?tex=q%28t%29) ，就要用到泛函分析里的**变分法**\[1\]。泛函分析就是对函数的函数的分析。
+
+假设 ![q(t)](https://www.zhihu.com/equation?tex=q%28t%29) 是我们要找的那条路径。给这条路径添加一个极其微小的扰动 ![\delta q(t)](https://www.zhihu.com/equation?tex=%5Cdelta+q%28t%29)，得到一条附近的路径：
+
+![q_\{new\}(t) = q(t) + \delta q(t)](https://www.zhihu.com/equation?tex=q_%7Bnew%7D%28t%29+%3D+q%28t%29+%2B+%5Cdelta+q%28t%29)
+
+为了保证路径的起点和终点固定，我们要求在边界处扰动为零：
+
+![\delta q(t_1) = \delta q(t_2) = 0](https://www.zhihu.com/equation?tex=%5Cdelta+q%28t_1%29+%3D+%5Cdelta+q%28t_2%29+%3D+0)
+
+把微小扰动后作用量的变化量为 ![0](https://www.zhihu.com/equation?tex=0) 写成式子就是： ![\delta S=\int_\{t_1\}^\{t_2\} [L(q+\delta q, \dot\{q\}+\delta\dot\{q\}, t)-L(q, \dot\{q\}, t)] dt=0](https://www.zhihu.com/equation?tex=%5Cdelta+S%3D%5Cint_%7Bt_1%7D%5E%7Bt_2%7D+%5BL%28q%2B%5Cdelta+q%2C+%5Cdot%7Bq%7D%2B%5Cdelta%5Cdot%7Bq%7D%2C+t%29-L%28q%2C+%5Cdot%7Bq%7D%2C+t%29%5D+dt%3D0) 对 ![L(q+\delta q, \dot\{q\}+\delta\dot\{q\}, t)](https://www.zhihu.com/equation?tex=L%28q%2B%5Cdelta+q%2C+%5Cdot%7Bq%7D%2B%5Cdelta%5Cdot%7Bq%7D%2C+t%29) 用一阶泰勒展开，得到 ![L(q+\delta q, \dot\{q\}+\delta\dot\{q\}, t)=L(q, \dot\{q\}, t)+\frac\{\partial L\}\{\partial q\}\delta q+\frac\{\partial L\}\{\partial \dot\{q\}\}\delta\dot\{q\}+o((\delta q+\delta\dot\{q\})^2)](https://www.zhihu.com/equation?tex=L%28q%2B%5Cdelta+q%2C+%5Cdot%7Bq%7D%2B%5Cdelta%5Cdot%7Bq%7D%2C+t%29%3DL%28q%2C+%5Cdot%7Bq%7D%2C+t%29%2B%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+q%7D%5Cdelta+q%2B%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D%7D%5Cdelta%5Cdot%7Bq%7D%2Bo%28%28%5Cdelta+q%2B%5Cdelta%5Cdot%7Bq%7D%29%5E2%29) 代入到上一条式子，就变成： ![\delta S=\int_\{t_1\}^\{t_2\}(\frac\{\partial L\}\{\partial q\}\delta q+\frac\{\partial L\}\{\partial \dot\{q\}\}\delta\dot\{q\})dt=0](https://www.zhihu.com/equation?tex=%5Cdelta+S%3D%5Cint_%7Bt_1%7D%5E%7Bt_2%7D%28%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+q%7D%5Cdelta+q%2B%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D%7D%5Cdelta%5Cdot%7Bq%7D%29dt%3D0) 注意到 ![\int_\{t_1\}^\{t_2\}\frac\{\partial L\}\{\partial \dot\{q\}\}\delta \dot\{q\}dt=\int_\{t_1\}^\{t_2\}\frac\{\partial L\}\{\partial \dot\{q\}\}(\frac\{d\}\{dt\}\delta q) dt](https://www.zhihu.com/equation?tex=%5Cint_%7Bt_1%7D%5E%7Bt_2%7D%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D%7D%5Cdelta+%5Cdot%7Bq%7Ddt%3D%5Cint_%7Bt_1%7D%5E%7Bt_2%7D%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D%7D%28%5Cfrac%7Bd%7D%7Bdt%7D%5Cdelta+q%29+dt)
+
+在此用乘法求导法则的逆运算：
+
+![\int_\{t_1\}^\{t_2\} \frac\{\partial L\}\{\partial \dot\{q\}\} \frac\{d\}\{dt\}(\delta q) dt = \left[ \frac\{\partial L\}\{\partial \dot\{q\}\} \delta q \right]_\{t_1\}^\{t_2\} - \int_\{t_1\}^\{t_2\} \frac\{d\}\{dt\} \left( \frac\{\partial L\}\{\partial \dot\{q\}\} \right) \delta q \, dt](https://www.zhihu.com/equation?tex=%5Cint_%7Bt_1%7D%5E%7Bt_2%7D+%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D%7D+%5Cfrac%7Bd%7D%7Bdt%7D%28%5Cdelta+q%29+dt+%3D+%5Cleft%5B+%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D%7D+%5Cdelta+q+%5Cright%5D_%7Bt_1%7D%5E%7Bt_2%7D+-+%5Cint_%7Bt_1%7D%5E%7Bt_2%7D+%5Cfrac%7Bd%7D%7Bdt%7D+%5Cleft%28+%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D%7D+%5Cright%29+%5Cdelta+q+%5C%2C+dt)
+
+前面已经设定了边界处的扰动为零，那么等式右边第一项就是 ![0](https://www.zhihu.com/equation?tex=0) ，也就是说 ![\int_\{t_1\}^\{t_2\} \frac\{\partial L\}\{\partial \dot\{q\}\} \frac\{d\}\{dt\}(\delta q) dt = - \int_\{t_1\}^\{t_2\} \frac\{d\}\{dt\} \left( \frac\{\partial L\}\{\partial \dot\{q\}\} \right) \delta q \, dt](https://www.zhihu.com/equation?tex=%5Cint_%7Bt_1%7D%5E%7Bt_2%7D+%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D%7D+%5Cfrac%7Bd%7D%7Bdt%7D%28%5Cdelta+q%29+dt+%3D+-+%5Cint_%7Bt_1%7D%5E%7Bt_2%7D+%5Cfrac%7Bd%7D%7Bdt%7D+%5Cleft%28+%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D%7D+%5Cright%29+%5Cdelta+q+%5C%2C+dt) 代回 ![\delta S](https://www.zhihu.com/equation?tex=%5Cdelta+S) 的表达式中：
+
+![\delta S = \int_\{t_1\}^\{t_2\} \left[ \frac\{\partial L\}\{\partial q\} - \frac\{d\}\{dt\} \left( \frac\{\partial L\}\{\partial \dot\{q\}\} \right) \right] \delta q \, dt = 0](https://www.zhihu.com/equation?tex=%5Cdelta+S+%3D+%5Cint_%7Bt_1%7D%5E%7Bt_2%7D+%5Cleft%5B+%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+q%7D+-+%5Cfrac%7Bd%7D%7Bdt%7D+%5Cleft%28+%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D%7D+%5Cright%29+%5Cright%5D+%5Cdelta+q+%5C%2C+dt+%3D+0)
+
+根据变分法基本引理，如果对于任意的选择函数 ![\delta q(t)](https://www.zhihu.com/equation?tex=%5Cdelta+q%28t%29)，该积分始终为零，那么括号内的被积函数必须本身恒等于零。于是，我们得到了欧拉-拉格朗日方程：
+
+![\frac\{d\}\{dt\} \left( \frac\{\partial L\}\{\partial \dot\{q\}_i\} \right) - \frac\{\partial L\}\{\partial q_i\} = 0](https://www.zhihu.com/equation?tex=%5Cfrac%7Bd%7D%7Bdt%7D+%5Cleft%28+%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+%5Cdot%7Bq%7D_i%7D+%5Cright%29+-+%5Cfrac%7B%5Cpartial+L%7D%7B%5Cpartial+q_i%7D+%3D+0)
+
+齐次微分方程
+------
+
+简谐运动的动能 ![T=\frac12m\dot\{q\}^2](https://www.zhihu.com/equation?tex=T%3D%5Cfrac12m%5Cdot%7Bq%7D%5E2) ，势能 ![V=\frac12kq^2=\frac12m\omega^2q^2](https://www.zhihu.com/equation?tex=V%3D%5Cfrac12kq%5E2%3D%5Cfrac12m%5Comega%5E2q%5E2) .
+
+代入拉格朗日量 ![L=T-V](https://www.zhihu.com/equation?tex=L%3DT-V) ，再代入欧拉-拉格朗日方程，就得到 ![m\ddot\{q\}+m\omega^2q=0](https://www.zhihu.com/equation?tex=m%5Cddot%7Bq%7D%2Bm%5Comega%5E2q%3D0) 消去 ![m](https://www.zhihu.com/equation?tex=m) ，是一个二阶线性齐次常微分方程，特征方程是 ![r^2+\omega^2=0](https://www.zhihu.com/equation?tex=r%5E2%2B%5Comega%5E2%3D0) ，解得 ![r = \pm i\omega](https://www.zhihu.com/equation?tex=r+%3D+%5Cpm+i%5Comega)。
+
+所以该方程的通解形式为：
+
+![q(t) = c_1 e^\{i\omega t\} + c_2 e^\{-i\omega t\}](https://www.zhihu.com/equation?tex=q%28t%29+%3D+c_1+e%5E%7Bi%5Comega+t%7D+%2B+c_2+e%5E%7B-i%5Comega+t%7D)
+
+利用欧拉公式 ![e^\{i\theta\} = \cos\theta + i\sin\theta](https://www.zhihu.com/equation?tex=e%5E%7Bi%5Ctheta%7D+%3D+%5Ccos%5Ctheta+%2B+i%5Csin%5Ctheta)，上式可以重新改写为：
+
+![q(t) = A \sin(\omega t + \phi)](https://www.zhihu.com/equation?tex=q%28t%29+%3D+A+%5Csin%28%5Comega+t+%2B+%5Cphi%29)
+
+这样从运动轨迹的角度说明了简谐运动公式是正弦函数。
+
+* * *
+
+还没完，让我们转换视角——
+
+哈密顿正则方程
+-------
+
+广义动量 ![p=\frac\{\partial T\}\{\partial \dot\{q\}\}=m\dot\{q\}](https://www.zhihu.com/equation?tex=p%3D%5Cfrac%7B%5Cpartial+T%7D%7B%5Cpartial+%5Cdot%7Bq%7D%7D%3Dm%5Cdot%7Bq%7D) ，将广义坐标与广义动量组成的坐标 ![(q,p)](https://www.zhihu.com/equation?tex=%28q%2Cp%29) 所形成的空间称为**相空间**。
+
+显然，相空间包含了所有可能的运动状态。和拉格朗日量对称，哈密顿量是 ![H=T+V](https://www.zhihu.com/equation?tex=H%3DT%2BV) 将其用 ![q,p](https://www.zhihu.com/equation?tex=q%2Cp) 表示， ![H=\frac\{p^2\}\{2m\}+\frac12m\omega^2q^2](https://www.zhihu.com/equation?tex=H%3D%5Cfrac%7Bp%5E2%7D%7B2m%7D%2B%5Cfrac12m%5Comega%5E2q%5E2) ，这是因为动量的平方除以两倍质量等于动能。通过哈密顿量，我们可以得到哈密顿正则方程：![\dot\{q\} = \frac\{\partial H\}\{\partial p\}](https://www.zhihu.com/equation?tex=%5Cdot%7Bq%7D+%3D+%5Cfrac%7B%5Cpartial+H%7D%7B%5Cpartial+p%7D) ，![\dot\{p\} = -\frac\{\partial H\}\{\partial q\}](https://www.zhihu.com/equation?tex=%5Cdot%7Bp%7D+%3D+-%5Cfrac%7B%5Cpartial+H%7D%7B%5Cpartial+q%7D)
+
+那么由于哈密顿量等于动能与势能的和，而且能量守恒，所以哈密顿量 ![H](https://www.zhihu.com/equation?tex=H) 是定值，也就是总能量 ![E](https://www.zhihu.com/equation?tex=E) ！方程 ![\frac\{p^2\}\{2m\} + \frac\{1\}\{2\}m\omega^2q^2 = E](https://www.zhihu.com/equation?tex=%5Cfrac%7Bp%5E2%7D%7B2m%7D+%2B+%5Cfrac%7B1%7D%7B2%7Dm%5Comega%5E2q%5E2+%3D+E) 在相空间中描述的是一个**椭圆**。随着时间推移，代表系统状态的点沿着这个椭圆顺时针旋转。
+
+正则变换
+----
+
+简谐运动和哈密顿力学处理的其他棘手的非线性系统相比，它就是一只温顺的小羊羔。这些非线性系统中，离高中最近的就是大幅角单摆，而高中教材讲的都是摆角在 ![5°](https://www.zhihu.com/equation?tex=5%C2%B0) 以内的单摆，近似成简谐运动。再复杂一点的可就是双摆、三体。
+
+从相空间中选一团初始状态点，随着时间推移，这团东西会各种拉伸旋转扭曲缠绕，但是它的体积始终不变：其实把两个哈密顿方程写成矩阵形式就是
+
+![\begin\{pmatrix\} \dot\{q\} \\ \dot\{p\} \end\{pmatrix\} = \begin\{pmatrix\} 0 & 1 \\ -1 & 0 \end\{pmatrix\} \begin\{pmatrix\} \frac\{\partial H\}\{\partial q\} \\ \frac\{\partial H\}\{\partial p\} \end\{pmatrix\}](https://www.zhihu.com/equation?tex=%5Cbegin%7Bpmatrix%7D+%5Cdot%7Bq%7D+%5C%5C+%5Cdot%7Bp%7D+%5Cend%7Bpmatrix%7D+%3D+%5Cbegin%7Bpmatrix%7D+0+%26+1+%5C%5C+-1+%26+0+%5Cend%7Bpmatrix%7D+%5Cbegin%7Bpmatrix%7D+%5Cfrac%7B%5Cpartial+H%7D%7B%5Cpartial+q%7D+%5C%5C+%5Cfrac%7B%5Cpartial+H%7D%7B%5Cpartial+p%7D+%5Cend%7Bpmatrix%7D)
+
+这种反对称形式说明相空间中这个系统符合**辛结构**，式子中的系数方阵就是辛矩阵。这意味着辛面积会保持不变，也就是这团状态点在 ![(q_i,p_i)](https://www.zhihu.com/equation?tex=%28q_i%2Cp_i%29) 平面的投影面积的和不变。辛结构的另一个直接的推论是**刘维尔定理**，也就是体积保持不变。
+
+这些复杂的非线性系统在相空间的轨迹就远没有椭圆那么简单，这就需要正则变换将图形变得简单。可以用正则变换将原本的坐标 ![(q,p)](https://www.zhihu.com/equation?tex=%28q%2Cp%29) 变换为一组更简单的坐标 ![(Q,P)](https://www.zhihu.com/equation?tex=%28Q%2CP%29) ，同时保证变换后的坐标依然满足前面说的那两个哈密顿正则方程，从而保持辛结构。
+
+我们选取一个**第一类生成函数** ![F_1(q, Q)](https://www.zhihu.com/equation?tex=F_1%28q%2C+Q%29)：
+
+![F_1(q, Q) = \frac\{1\}\{2\}m\omega q^2 \cot Q](https://www.zhihu.com/equation?tex=F_1%28q%2C+Q%29+%3D+%5Cfrac%7B1%7D%7B2%7Dm%5Comega+q%5E2+%5Ccot+Q)
+
+![Q](https://www.zhihu.com/equation?tex=Q) 是变换后的新坐标，代表振动的相位角。根据第一类生成函数的转换关系，我们求出旧动量 ![p = \frac\{\partial F_1\}\{\partial q\} = m\omega q \cot Q](https://www.zhihu.com/equation?tex=p+%3D+%5Cfrac%7B%5Cpartial+F_1%7D%7B%5Cpartial+q%7D+%3D+m%5Comega+q+%5Ccot+Q) ，新动量![P = -\frac\{\partial F_1\}\{\partial Q\} = \frac\{1\}\{2\}m\omega q^2 \csc^2 Q](https://www.zhihu.com/equation?tex=P+%3D+-%5Cfrac%7B%5Cpartial+F_1%7D%7B%5Cpartial+Q%7D+%3D+%5Cfrac%7B1%7D%7B2%7Dm%5Comega+q%5E2+%5Ccsc%5E2+Q)
+
+通过代数变换，我们可以解出：
+
+![q = \sqrt\{\frac\{2P\}\{m\omega\}\} \sin Q](https://www.zhihu.com/equation?tex=q+%3D+%5Csqrt%7B%5Cfrac%7B2P%7D%7Bm%5Comega%7D%7D+%5Csin+Q)
+
+![p = \sqrt\{2m\omega P\} \cos Q](https://www.zhihu.com/equation?tex=p+%3D+%5Csqrt%7B2m%5Comega+P%7D+%5Ccos+Q)
+
+可以用**泊松括号**验证这是否是正则变换，计算 ![\{Q,P\}_\{q,p\}](https://www.zhihu.com/equation?tex=%5C%7BQ%2CP%5C%7D_%7Bq%2Cp%7D) 是否等于 ![1](https://www.zhihu.com/equation?tex=1) .
+
+由于正则变换的辛矩阵是可逆且对称的，所以可以计算 ![\{q,p\}_\{Q,P\}](https://www.zhihu.com/equation?tex=%5C%7Bq%2Cp%5C%7D_%7BQ%2CP%7D) 是否等于 ![1](https://www.zhihu.com/equation?tex=1)
+
+公式为：
+
+![\{q, p\}_\{Q, P\} = \frac\{\partial q\}\{\partial Q\} \frac\{\partial p\}\{\partial P\} - \frac\{\partial q\}\{\partial P\} \frac\{\partial p\}\{\partial Q\}](https://www.zhihu.com/equation?tex=%5C%7Bq%2C+p%5C%7D_%7BQ%2C+P%7D+%3D+%5Cfrac%7B%5Cpartial+q%7D%7B%5Cpartial+Q%7D+%5Cfrac%7B%5Cpartial+p%7D%7B%5Cpartial+P%7D+-+%5Cfrac%7B%5Cpartial+q%7D%7B%5Cpartial+P%7D+%5Cfrac%7B%5Cpartial+p%7D%7B%5Cpartial+Q%7D)
+
+前一项是
+
+![\frac\{\partial q\}\{\partial Q\} \frac\{\partial p\}\{\partial P\} = \left( \sqrt\{\frac\{2P\}\{m\omega\}\} \cos Q \right) \cdot \left( \sqrt\{\frac\{m\omega\}\{2P\}\} \cos Q \right)](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+q%7D%7B%5Cpartial+Q%7D+%5Cfrac%7B%5Cpartial+p%7D%7B%5Cpartial+P%7D+%3D+%5Cleft%28+%5Csqrt%7B%5Cfrac%7B2P%7D%7Bm%5Comega%7D%7D+%5Ccos+Q+%5Cright%29+%5Ccdot+%5Cleft%28+%5Csqrt%7B%5Cfrac%7Bm%5Comega%7D%7B2P%7D%7D+%5Ccos+Q+%5Cright%29)
+
+![\frac\{2P\}\{m\omega\}](https://www.zhihu.com/equation?tex=%5Cfrac%7B2P%7D%7Bm%5Comega%7D) 和 ![\frac\{m\omega\}\{2P\}](https://www.zhihu.com/equation?tex=%5Cfrac%7Bm%5Comega%7D%7B2P%7D) 刚好互为倒数，相乘抵消，直接就是
+
+![= \cos^2 Q](https://www.zhihu.com/equation?tex=%3D+%5Ccos%5E2+Q)
+
+后项是
+
+![\frac\{\partial q\}\{\partial P\} \frac\{\partial p\}\{\partial Q\} = \left( \sqrt\{\frac\{1\}\{2Pm\omega\}\} \sin Q \right) \cdot \left( -\sqrt\{2Pm\omega\} \sin Q \right)](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+q%7D%7B%5Cpartial+P%7D+%5Cfrac%7B%5Cpartial+p%7D%7B%5Cpartial+Q%7D+%3D+%5Cleft%28+%5Csqrt%7B%5Cfrac%7B1%7D%7B2Pm%5Comega%7D%7D+%5Csin+Q+%5Cright%29+%5Ccdot+%5Cleft%28+-%5Csqrt%7B2Pm%5Comega%7D+%5Csin+Q+%5Cright%29)
+
+同样的得到
+
+![= -\sin^2 Q](https://www.zhihu.com/equation?tex=%3D+-%5Csin%5E2+Q)
+
+得到的最终结果就是 ![1](https://www.zhihu.com/equation?tex=1) ，说明这是正则变换。现在可以将前面解出的
+
+![q = \sqrt\{\frac\{2P\}\{m\omega\}\} \sin Q](https://www.zhihu.com/equation?tex=q+%3D+%5Csqrt%7B%5Cfrac%7B2P%7D%7Bm%5Comega%7D%7D+%5Csin+Q)
+
+![p = \sqrt\{2m\omega P\} \cos Q](https://www.zhihu.com/equation?tex=p+%3D+%5Csqrt%7B2m%5Comega+P%7D+%5Ccos+Q)
+
+代入椭圆公式，也就是代入原哈密顿量
+
+![H = \frac\{(2m\omega P \cos^2 Q)\}\{2m\} + \frac\{1\}\{2\}m\omega^2 \left( \frac\{2P\}\{m\omega\} \sin^2 Q \right)](https://www.zhihu.com/equation?tex=H+%3D+%5Cfrac%7B%282m%5Comega+P+%5Ccos%5E2+Q%29%7D%7B2m%7D+%2B+%5Cfrac%7B1%7D%7B2%7Dm%5Comega%5E2+%5Cleft%28+%5Cfrac%7B2P%7D%7Bm%5Comega%7D+%5Csin%5E2+Q+%5Cright%29)
+
+![H = \omega P (\cos^2 Q + \sin^2 Q) = \omega P](https://www.zhihu.com/equation?tex=H+%3D+%5Comega+P+%28%5Ccos%5E2+Q+%2B+%5Csin%5E2+Q%29+%3D+%5Comega+P)
+
+  
+结果变得极其简洁。
+
+前面说过这仍然保持哈密顿正则方程，于是我们列出方程，此时正则方程变为：
+
+![\dot\{P\} = -\frac\{\partial K\}\{\partial Q\} = 0 \implies P = \text\{常数\}](https://www.zhihu.com/equation?tex=%5Cdot%7BP%7D+%3D+-%5Cfrac%7B%5Cpartial+K%7D%7B%5Cpartial+Q%7D+%3D+0+%5Cimplies+P+%3D+%5Ctext%7B%E5%B8%B8%E6%95%B0%7D)
+
+![\dot\{Q\} = \frac\{\partial K\}\{\partial P\} = \omega \implies Q(t) = \omega t + Q_0](https://www.zhihu.com/equation?tex=%5Cdot%7BQ%7D+%3D+%5Cfrac%7B%5Cpartial+K%7D%7B%5Cpartial+P%7D+%3D+%5Comega+%5Cimplies+Q%28t%29+%3D+%5Comega+t+%2B+Q_0)
+
+直接将 ![Q(t)](https://www.zhihu.com/equation?tex=Q%28t%29) 代入 ![q](https://www.zhihu.com/equation?tex=q) 的表达式：
+
+![q(t) = \text\{常数\} \cdot \sin(\omega t + \delta)](https://www.zhihu.com/equation?tex=q%28t%29+%3D+%5Ctext%7B%E5%B8%B8%E6%95%B0%7D+%5Ccdot+%5Csin%28%5Comega+t+%2B+%5Cdelta%29)
+
+这是更高级的证明，它表明简谐运动本质上是一个高维空间的旋转运动在低维空间的投影。至此，其他答主的各种代数推导和几何直观都被证明！
+
+![End.](https://www.zhihu.com/equation?tex=End.)
